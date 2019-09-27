@@ -1,0 +1,35 @@
+import db from './datastore'
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import store from './store'
+
+import { errorCaptured } from './utils/assist'
+
+Vue.prototype.$db = db
+Vue.prototype.$errorCaptured = errorCaptured
+
+if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+    components: { App },
+    router,
+    store,
+    template: '<App/>'
+}).$mount('#app')
+
+const welcome = document.getElementById('welcome')
+const welcomeImg = welcome.querySelector('.welcome-img')
+ // 一秒之后添加fade动画
+setTimeout(() => {
+    welcomeImg.classList.add('fade')
+}, 3000)
+
+// 动画运行完成了以后移除元素
+welcomeImg.addEventListener('webkitAnimationEnd', () => {
+    Vue.nextTick(() => {
+        document.body.removeChild(welcome)
+    })
+})
