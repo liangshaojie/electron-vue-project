@@ -3,6 +3,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import './plugins/andt-design-vue'
 
 import { errorCaptured } from './utils/assist'
 
@@ -14,22 +15,22 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-    components: { App },
-    router,
-    store,
-    template: '<App/>'
+  components: { App },
+  router,
+  store,
+  template: '<App/>'
 }).$mount('#app')
 
 const welcome = document.getElementById('welcome')
 const welcomeImg = welcome.querySelector('.welcome-img')
- // 一秒之后添加fade动画
+// 一秒之后添加fade动画
 setTimeout(() => {
-    welcomeImg.classList.add('fade')
-}, 3000)
+  welcomeImg.classList.add('fade')
+}, 100)
 
 // 动画运行完成了以后移除元素
 welcomeImg.addEventListener('webkitAnimationEnd', () => {
-    Vue.nextTick(() => {
-        document.body.removeChild(welcome)
-    })
+  Vue.nextTick(() => {
+    document.body.removeChild(welcome)
+  })
 })
