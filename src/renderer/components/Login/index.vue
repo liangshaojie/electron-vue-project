@@ -8,11 +8,6 @@
     centered
     :maskStyle="{backgroundColor: 'rgba(0, 0, 0, 0.1)'}"
   >
-    <a-button-group>
-      <a-button>Cancel</a-button>
-      <a-button type="primary">OK</a-button>
-    </a-button-group>
-    <a-icon type="caret-left"/>
     <a-form id="login" :form="form" @submit="handleSubmit">
       <a-form-item>
         <a-input
@@ -39,7 +34,10 @@
 </template>
 
 <script>
-import { login_cellphone } from "@/api/user";
+import { login_cellphone, user_detail } from "@/api/user";
+import eventBus from '@/utils/eventBus'
+// 一定要引入这个不然this指向不正确
+// import { setTimeout } from 'timers'
 export default {
   data() {
     return {
@@ -84,15 +82,16 @@ export default {
                 account,
                 ...detail
               });
+              var self = this
               setTimeout(() => {
-                if (this.$route.name === "home") {
-                  eventBus.$emit("refresh");
+                if (self.$route.name === 'home') {
+                  eventBus.$emit('refresh')
                 } else {
-                  let redirect = this.redirect || "/home";
-                  this.$router.push({ path: redirect });
+                  let redirect = self.redirect || '/home'
+                  self.$router.push({ path: redirect })
                 }
-                this.loading = false;
-              }, 100);
+                self.loading = false
+              }, 100)
             } else {
               this.loading = false;
             }

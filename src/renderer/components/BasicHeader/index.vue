@@ -15,10 +15,10 @@
                     <div class="item">
                         <user-info></user-info>
                     </div>
-                    <!-- <div class="item">
+                    <div class="item">
                         <theme-setting/>
                     </div>
-                    <div class="item" @click="$router.push({path:'/setting'})">
+                    <!-- <div class="item" @click="$router.push({path:'/setting'})">
                         <a-icon type="setting" class="icon"/>
                     </div>
                     <div class="item" @click="logout" v-if="userId">退出</div> -->
@@ -32,12 +32,14 @@
 import Controls from "./Controls";
 import SearchBox from "./SeachBox";
 import UserInfo from './UserInfo'
+import ThemeSetting from './ThemeSetting'
 
 export default {
   components: {
     Controls,
     SearchBox,
-    UserInfo
+    UserInfo,
+    ThemeSetting
   }
 };
 </script>

@@ -4,6 +4,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './plugins/andt-design-vue'
+import './plugins/vue-lazyload'
+import createdInit from './core/createdInit'
 
 import { errorCaptured } from './utils/assist'
 
@@ -18,6 +20,9 @@ new Vue({
   components: { App },
   router,
   store,
+  created () {
+    createdInit()
+  },
   template: '<App/>'
 }).$mount('#app')
 

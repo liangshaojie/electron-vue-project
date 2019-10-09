@@ -30,6 +30,8 @@ import BasicHeader from "@/components/BasicHeader";
 import BasicSider from "@/components/BasicSider";
 import Login from "@/components/Login";
 import Offline from "@/components/Offline/index";
+import eventBus from "@/utils/eventBus";
+import { setTimeout } from "timers";
 const SIDER_WIDTH_DEFAULT = 200;
 const SIDER_WIDTH_MAX = 400;
 export default {
@@ -45,6 +47,19 @@ export default {
   computed: {
     ...mapGetters("App", ["isOnliline"]),
     ...mapState("App", ["noLimitRoutes"])
+  },
+  created() {
+    eventBus.$on("refresh", () => {
+      const matched = this.$route.matched;
+      const currentRoute = matched[matched.length - 1];
+      const name = currentRoute.components.default.name;
+      this.refresh = true;
+      this.keepAliveExcludeList.unshift(name);
+      this.$nextTick(() => {
+        this.refresh = false;
+        this.keepAliveExcludeList.shift();
+      });
+    });
   }
 };
 </script>

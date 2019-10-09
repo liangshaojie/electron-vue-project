@@ -26,7 +26,7 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, '../static/
 let whiteListedModules = ['vue']
 
 let rendererConfig = {
-    devtool: '#cheap-module-eval-source-map',
+    devtool: 'source-map',
     entry: {
         renderer: path.join(__dirname, '../src/renderer/main.js')
     },
