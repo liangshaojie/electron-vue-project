@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '@/store/index.js'
 import BasicLayout from '@/layouts/BasicLayout'
 import { recommendRoutes } from './modules/recommend'
+import { settingRoutes } from './modules/setting'
 
 Vue.use(Router)
 
@@ -15,7 +16,8 @@ export default new Router({
       component: BasicLayout,
       redirect: '/home',
       children: [
-        ...recommendRoutes
+        ...recommendRoutes,
+        ...settingRoutes
       ]
     }
   ]

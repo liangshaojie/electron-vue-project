@@ -1,38 +1,39 @@
 <template>
-    <div class="top-bar">
-        <div class="top-bar-logo">
-            <img src="../../assets/images/logo.svg" alt="LOGO">
-        </div>
-        <div class="top-bar-main">
-            <div class="top-bar-control">
-                <controls/>
-            </div>
-            <div class="top-bar-search">
-                <search-box/>
-            </div>
-            <div class="top-bar-menu">
-                <div class="top-bar-menu-user">
-                    <div class="item">
-                        <user-info></user-info>
-                    </div>
-                    <div class="item">
-                        <theme-setting/>
-                    </div>
-                    <!-- <div class="item" @click="$router.push({path:'/setting'})">
-                        <a-icon type="setting" class="icon"/>
-                    </div>
-                    <div class="item" @click="logout" v-if="userId">退出</div> -->
-                </div>
-                <!-- <frame-actions/> -->
-            </div>
-        </div>
+  <div class="top-bar">
+    <div class="top-bar-logo">
+      <img src="../../assets/images/logo.svg" alt="LOGO">
     </div>
+    <div class="top-bar-main">
+      <div class="top-bar-control">
+        <controls/>
+      </div>
+      <div class="top-bar-search">
+        <search-box/>
+      </div>
+      <div class="top-bar-menu">
+        <div class="top-bar-menu-user">
+          <div class="item">
+            <user-info></user-info>
+          </div>
+          <div class="item">
+            <theme-setting/>
+          </div>
+          <div class="item" @click="$router.push({path:'/setting'})">
+            <a-icon type="setting" class="icon"/>
+          </div>
+          <div class="item" @click="logout" v-if="userId">退出</div>
+        </div>
+        <!-- <frame-actions/> -->
+      </div>
+    </div>
+  </div>
 </template>
 <script>
+import { mapGetters, mapState } from "vuex";
 import Controls from "./Controls";
 import SearchBox from "./SeachBox";
-import UserInfo from './UserInfo'
-import ThemeSetting from './ThemeSetting'
+import UserInfo from "./UserInfo";
+import ThemeSetting from "./ThemeSetting";
 
 export default {
   components: {
@@ -40,6 +41,21 @@ export default {
     SearchBox,
     UserInfo,
     ThemeSetting
+  },
+  computed: {
+    ...mapGetters("User", ["userId"])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("User/logout").then(() => {
+        this.$message.success("退出成功");
+        if (this.$route.name === "home") {
+          eventBus.$emit("refresh");
+        } else {
+          this.$router.push({ path: "/home" });
+        }
+      });
+    }
   }
 };
 </script>
