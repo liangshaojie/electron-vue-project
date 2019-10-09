@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export function checkUpdate() {
-    return axios.get('https://api.github.com/repos/xiaozhu188/electron-vue-cloud-music/releases/latest')
+    return axios.get('https://api.github.com/repos/liangshaojie/electron-vue-project/releases/latest')
 }
