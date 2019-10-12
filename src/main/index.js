@@ -60,21 +60,21 @@ function createWindow () {
     icon: previewIcon,
     height: 690,
     useContentSize: true,
-    width: 1500,
+    width: 1000,
     minWidth: 992,
     minHeight: 670,
-    // frame: false,
+    frame: false,
     show: true,
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
       webSecurity: false,
       navigateOnDragDrop: true
-      // devTools: true
+      // devTools: false
     }
   })
 
-  // mainWindow.setMenu(null)
+  mainWindow.setMenu(null)
 
   mainWindow.loadURL(winURL)
 

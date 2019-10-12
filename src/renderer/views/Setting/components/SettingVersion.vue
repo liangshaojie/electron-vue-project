@@ -43,7 +43,6 @@ export default {
           .then(res => {
             let data = res.data;
             this.remoteVersion = data.name;
-            debugger
             // this.$store.commit('Update/SET_REMOTE_VERSION', data.name)
             this.$electron.ipcRenderer.send("update-version", this.remoteVersion);
             let shouldUpdate = semver.gt(this.remoteVersion, this.localVersion);

@@ -1,29 +1,45 @@
 <template>
-    <div class="basic-sider">
-        <a-menu
-            v-model="current"
-            mode="inline"
-            :selectable="false"
-            :defaultOpenKeys="['playlist_create','playlist_collect']"
-        >
-            <a-menu-item-group key="recommend">
-                <div slot="title">
-                    <span>推荐</span>
-                </div>
-            </a-menu-item-group>
-        </a-menu>
-    </div>
+  <div class="basic-sider">
+    <a-menu
+      v-model="current"
+      mode="inline"
+      :selectable="false"
+      :defaultOpenKeys="['playlist_create','playlist_collect']"
+    >
+      <a-menu-item-group key="recommend">
+        <div slot="title">
+          <span>推荐</span>
+        </div>
+        <template v-for="item in recommendMap">
+          <a-menu-item :key="item.name">
+            <router-link class="link" :to="item.path">
+              <z-icon :type="item.meta.icon"/>
+              <span>{{item.meta.title}}</span>
+            </router-link>
+          </a-menu-item>
+        </template>
+      </a-menu-item-group>
+    </a-menu>
+  </div>
 </template>
 
 <script>
+import ZIcon from "@/components/ZIcon";
+import { recommendMap } from "../../router/modules/recommend.js";
 export default {
   data() {
     return {
       current: [],
-    //   recommendMap,
-    //   myMusicMap,
+      recommendMap,
+      //   myMusicMap,
       playlist: []
     };
+  },
+  components: {
+    ZIcon
+  },
+  mounted() {
+    console.log(this.recommendMap);
   }
 };
 </script>

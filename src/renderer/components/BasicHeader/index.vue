@@ -23,7 +23,7 @@
           </div>
           <div class="item" @click="logout" v-if="userId">退出</div>
         </div>
-        <!-- <frame-actions/> -->
+        <frame-actions/>
       </div>
     </div>
   </div>
@@ -34,13 +34,15 @@ import Controls from "./Controls";
 import SearchBox from "./SeachBox";
 import UserInfo from "./UserInfo";
 import ThemeSetting from "./ThemeSetting";
+import FrameActions from './FrameActions'
 
 export default {
   components: {
     Controls,
     SearchBox,
     UserInfo,
-    ThemeSetting
+    ThemeSetting,
+    FrameActions
   },
   computed: {
     ...mapGetters("User", ["userId"])
